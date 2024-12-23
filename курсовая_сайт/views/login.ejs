@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <style>
+    body {
+      background-color: antiquewhite;
+    }
+    </style>
+  <head>
+    <title>Авторизация</title>
+  </head>
+  <body>
+    <h1>Авторизация</h1>
+    <form method="post" action="/login">
+      <input type="text" id="login" name="login" placeholder="Логин в формате xxx123" required /><br /><br />
+      <input type="text" id="name" name="name" placeholder="Имя" required /><br /><br />
+      <input
+        type="password"
+        id="password"
+        name="password" placeholder="Пароль"
+        required
+      /><br /><br />
+      <input type="submit" value="Войти" />
+    </form>
+    <p><a href="/register">Регистрация</a></p>
+  </body>
+</html>
