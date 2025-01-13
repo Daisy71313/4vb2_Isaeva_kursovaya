@@ -1,27 +1,116 @@
 <!doctype html>
 <html>
-  <style>
-    body {
-      background-color: antiquewhite;
-    }
-    </style>
-    <head>
-    <title>Регистрация</title>
-  </head>
-  <body>
-    <h1>Регистрация</h1>
-    <form method="post" action="/register">
-      <input type="text" id="login" name="login" placeholder="Логин в формате xxx123" required /><br /><br />
-      <input type="text" id="name" name="name" placeholder="Имя" required /><br /><br />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Пароль"
-        required 
-      /><br /><br />
-      <input type="submit" value="Зарегистрироваться" />
-    </form>
-    <p><a href="/login">Авторизация</a></p>
-  </body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+  rel="stylesheet">
+<style>
+  body {
+    background-color: antiquewhite;
+  }
+
+  .reg {
+    display: flex;
+    justify-content: center;
+  }
+
+  input {
+    background-color: #FFE9E9;
+    width: 350px;
+    height: 30px;
+    border-radius: 30px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  ::placeholder {
+    font-family: "Jost", serif;
+    font-size: 16px;
+    letter-spacing: 4%;
+    color: #750604;
+    opacity: 90%;
+    font-weight: 900;
+  }
+
+  .reg_block {
+    display: block;
+    margin-top: 100px;
+    text-align: left;
+    padding-left: 140px;
+    padding-top: 100px;
+    width: 1090px;
+    height: 658px;
+    background-color: #750604;
+    opacity: 70%;
+  }
+
+  .button {
+    width: 270px;
+    height: 40px;
+    background-color: #C7816C;
+    color: white;
+    font-size: 20px;
+    border-color: none;
+    font-weight: 700;
+    margin-bottom: 0;
+
+  }
+
+  .reg_block h1 {
+    color: #FFFFFF;
+    font-family: "Jost", serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin-left: 35px;
+    margin-bottom: 20px;
+
+  }
+
+  .regaut {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    
+  }
+
+
+  .reg p a {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    font-family: "Jost", serif;
+    margin-left: 20px;
+  }
+
+  .img_reg {
+    position: absolute;
+    margin-left: 750px;
+  }
+</style>
+
+<head>
+  <title>Регистрация</title>
+</head>
+
+<body>
+  <div class="reg">
+    <div class="reg_block">
+      <h1>Регистрация</h1>
+      <form method="post" action="/register">
+        <input type="text" id="login" name="login" placeholder="Логин в формате xxx123" required /><br /><br />
+        <input type="text" id="name" name="name" placeholder="Имя" required /><br /><br />
+        <input type="password" id="password" name="password" placeholder="Пароль" required /><br /><br />
+        <div class="regaut">
+          <input type="submit" value="Зарегистрироваться"  class="button"/>
+          <p><a href="/login">Войти</a></p>
+        </div>
+      </form>
+    </div>
+    <img src="/img/img1.png" alt="" class="img_reg">
+  </div>
+</body>
+
 </html>

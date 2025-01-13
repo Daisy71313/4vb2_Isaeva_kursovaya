@@ -7,85 +7,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
   rel="stylesheet">
 <style>
- body {
-  background-color: antiquewhite;
-}
+  body {
+    background-color: antiquewhite;
+  }
 
-.auth {
-  display: flex;
-  justify-content: center;
-}
+  .auth {
+    display: flex;
+    justify-content: center;
+  }
 
-input {
-  background-color: #FFE9E9;
-  width: 350px;
-  height: 30px;
-  border-radius: 30px;
-  padding-left: 10px;
-  margin-bottom: 10px;
-}
+  input {
+    background-color: #FFE9E9;
+    width: 350px;
+    height: 35px;
+    border-radius: 30px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
 
-::placeholder {
-  font-family: "Jost", serif;
-  font-size: 16px;
-  letter-spacing: 4%;
-  color: #750604;
-  opacity: 90%;
-  font-weight: 900;
-}
 
-.auth_block {
-  display: block;
-  margin-top: 100px;
-  text-align: left;
-  padding-left: 140px;
-  padding-top: 100px;
-  width: 1090px;
-  height: 658px;
-  background-color: #750604;
-  opacity: 70%;
-}
+  ::placeholder {
+    font-family: "Jost", serif;
+    font-size: 16px;
+    letter-spacing: 4%;
+    color: #750604;
+    opacity: 90%;
+    font-weight: 900;
+  }
 
-.button {
-  width: 180px;
-  height: 35px;
-  background-color: #C7816C;
-  color: white;
-  font-size: 20px;
-  border-color: none;
-  font-weight: 700;
-  margin-bottom: 0;
+  .auth_block {
+    display: block;
+    margin-top: 100px;
+    text-align: left;
+    padding-left: 140px;
+    padding-top: 100px;
+    width: 1090px;
+    height: 658px;
+    background-color: #750604;
+    opacity: 70%;
+  }
 
-}
+  .button {
+    width: 180px;
+    height: 40px;
+    background-color: #ca785f;
+    color: white;
+    font-size: 20px;
+    border-color: none;
+    font-weight: 700;
+    margin-bottom: 0;
 
-.auth_block h1 {
-  color: #FFFFFF;
-  font-family: "Jost", serif;
-  font-size: 48px;
-  font-weight: 700;
-  margin-left: 30px;
-  margin-bottom: 20px;
+  }
 
-}
-.regaut {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-}
+  .auth_block h1 {
+    color: #FFFFFF;
+    font-family: "Jost", serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin-left: 30px;
+    margin-bottom: 20px;
 
-.auth p a {
-  font-size: 20px;
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-  font-family: "Jost", serif;
-  margin-left: 20px;
-}
+  }
+  .auth p a {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    font-family: "Jost", serif;
+    margin-left: 20px;
+  }
 
-.img_auth {
-  position: absolute;
-  margin-left: 750px;
-}
+  .img_auth {
+    position: absolute;
+    margin-left: 750px;
+  }
 </style>
 
 <head>
@@ -100,13 +95,10 @@ input {
         <input type="text" id="login" name="login" placeholder="Логин в формате xxx123" required /><br /><br />
         <input type="text" id="name" name="name" placeholder="Имя" required /><br /><br />
         <input type="password" id="password" name="password" placeholder="Пароль" required /><br /><br />
-        <div class="regaut">
-        <input type="submit" value="Войти" class="button"/>
-        <p><a href="/register" >Регистрация</a></p>
-      </div>
+        <input type="submit" value="Войти" class="button" />
       </form>
     </div>
-    <img src="img/img1.png" class="img_auth">
+    <img src="/img/img1.png" class="img_auth">
   </div>
 </body>
 
