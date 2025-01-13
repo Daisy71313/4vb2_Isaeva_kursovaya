@@ -160,14 +160,14 @@ app.get("/register", async (req, res) => {
 
 // Роут для обработки регистрации
 app.post("/register", async (req, res) => {
-  const { login, password } = req.body;
+  const { login, password, name } = req.body;
   try {
     const role = await Role.findOne({ where: { name: "user" } });
     if (!role) {
       return res.status(400).send("Роль не найдена");
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({ login, password: hashedPassword, roleId: role.id });
+    await User.create({ login, password: hashedPassword, roleId: role.id, name });
     res.redirect("/login");
   } catch (error) {
     console.error("Ошибка регистрации:", error);
