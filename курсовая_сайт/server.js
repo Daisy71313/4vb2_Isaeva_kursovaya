@@ -11,7 +11,7 @@ const port = 3000;
 // Настройка базы данных SQLite
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: "dbkur.sqlite",
+  storage: "db.sqlite",
 });
 
 // Модель роли
@@ -91,6 +91,11 @@ sequelize
 
     // Если нет пользователей - создаем админа
     if (usersCount === 0) {
+      const adminRole = await Role.findOne({ where: { name: "admin" } });
+      if (!adminRole) {
+        console.error("Роль администратора не найдена");
+        return;
+      }
       const hashedPassword = await bcrypt.hash("admin", 10); // Пароль admin
       await User.create({
         login: "admin",
@@ -102,7 +107,6 @@ sequelize
     }
   })
   .catch((err) => console.error(err));
-
 // Middleware (без изменений)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -142,7 +146,6 @@ function hasRole(roleName) {
   };
 }
 
-// Маршруты (без изменений)
 
 // Главная страница
 app.get("/", (req, res) => {
@@ -200,16 +203,22 @@ app.post("/login", async (req, res) => {
     res.status(500).send("Ошибка сервера: " + error.message);
   }
 });
+app.get("/login", isAuthenticated, (req, res) => {
+  // Проверяем, является ли пользователь администратором
+  if (req.session.user.role === "admin") {
+    // Если администратор, перенаправляем его на админ-панель
+    return res.redirect("/adminp");
+  }
 
+  // Если пользователь не администратор, перенаправляем на страницу профиля
+  res.redirect("/profile");
+});
 // Роут для страницы профиля
 app.get("/profile", isAuthenticated, (req, res) => {
-  res.send(
-    `Добро пожаловать, ${req.session.user.login}! <a href="/logout">Выйти</a>`
-  );
 });
 
 // Роут для страницы админа
-app.get("/admin", isAuthenticated, hasRole("admin"), (req, res) => {
+app.get("/adminp", isAuthenticated, hasRole("admin"), (req, res) => {
   res.send("Добро пожаловать в админ-панель! Только для администраторов.");
 });
 
