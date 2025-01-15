@@ -101,7 +101,7 @@ sequelize
         login: "admin",
         name: "admind",
         password: hashedPassword,
-        roleId: adminRole[0].id,
+        roleId: adminRole.id,
       });
       console.log("Администратор создан");
     }
@@ -160,7 +160,6 @@ app.get("/", (req, res) => {
 app.get("/register", async (req, res) => {
   res.render("register");
 });
-
 // Роут для обработки регистрации
 app.post("/register", async (req, res) => {
   const { login, password, name } = req.body;
@@ -178,12 +177,33 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Роут для страницы авторизации
+// Middleware для проверки авторизации
+const authMiddleware = (req, res, next) => {
+  if (req.session && req.session.user) { // Проверяем существование req.session
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
+
+// Middleware для проверки роли администратора
+const adminMiddleware = (req, res, next) => {
+  if (req.session && req.session.user && req.session.user.role === 'admin') {
+    next();
+  } else {
+    res.redirect('/'); // Перенаправляем на главную, если не админ
+  }
+};
+
+// ... (остальной код, включая модели User и Role) ...
+
+
+// Роут для страницы авторизации (без изменений)
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
-// Роут для обработки авторизации
+// Роут для обработки авторизации 
 app.post("/login", async (req, res) => {
   const { login, password } = req.body;
   try {
@@ -194,7 +214,7 @@ app.post("/login", async (req, res) => {
         login: user.login,
         role: user.Role.name,
       };
-      res.redirect("/profile");
+      res.redirect("/"); // Перенаправляем на главную страницу
     } else {
       res.status(401).send("Неверный логин или пароль");
     }
@@ -203,30 +223,23 @@ app.post("/login", async (req, res) => {
     res.status(500).send("Ошибка сервера: " + error.message);
   }
 });
-app.get("/login", isAuthenticated, (req, res) => {
-  // Проверяем, является ли пользователь администратором
-  if (req.session.user.role === "admin") {
-    // Если администратор, перенаправляем его на админ-панель
-    return res.redirect("/adminp");
-  }
 
-  // Если пользователь не администратор, перенаправляем на страницу профиля
-  res.redirect("/profile");
-});
-// Роут для страницы профиля
-app.get("/profile", isAuthenticated, (req, res) => {
+// Роут для главной страницы (с рендерингом EJS)
+app.get("/profile", authMiddleware, (req, res) => {
+  res.render("profile", { user: req.session.user });
 });
 
-// Роут для страницы админа
-app.get("/adminp", isAuthenticated, hasRole("admin"), (req, res) => {
-  res.send("Добро пожаловать в админ-панель! Только для администраторов.");
+// Роут для страницы админа (с рендерингом EJS)
+app.get("/adminp", authMiddleware, adminMiddleware, (req, res) => {
+  res.render("admin", { user: req.session.user });
 });
 
-// Роут для выхода
+
+// Роут для выхода (без изменений)
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) console.error("Ошибка при выходе:", err);
-    res.redirect("/");
+    res.redirect("/login");
   });
 });
 

@@ -12,8 +12,31 @@
     <title>Главная</title>
 </head>
 <body>
-<header>
-    <img src="/img/logo.png" alt="">
-</header>
+    <header>
+        <img src="/img/logo.png" alt="">
+        <ul>
+            <a><li>Коммуникации</li></a>
+            <a><li>Новости</li></a>
+            <a><li>О нас</li></a>
+            <a><li>Мероприятия</li></a>
+        </ul>
+        <a href="/logout">Выйти</a>
+        <% if (user) { %>
+          <% if (user.role === 'admin') { %>
+            <a href="/adminp">Админ-панель</a>
+          <% } %>
+        <% } else { %>
+          <p>Пожалуйста, авторизуйтесь.</p>
+        <% } %>
+    </header>
+    <div class="index_1">
+      <img src="/img/image 1.png" alt="" class="index_img">
+      <div class="text_boxin1">
+        <h2>Дай пять!</h2>
+        <h3>Обновлённая культура Rostic's! <br> Жми на кнопку, чтобы разделить ценности с Rostic’s</h3>
+        <button class="button_in1">перейти к ценностям</button>
+      </div>
+    </div>
 </body>
+
 </html>
