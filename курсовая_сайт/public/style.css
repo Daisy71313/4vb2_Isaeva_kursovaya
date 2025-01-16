@@ -1,5 +1,6 @@
 body {
     background-color:  #FFE9E9;
+    display: block;
   }
   .header-box {
     width: 100%;
@@ -24,7 +25,7 @@ body {
     justify-content:space-between;
     font-family: "Jost", serif;
     font-size: 22px;
-    color: #FFFFFF;
+    color: #FFFFFF; 
     letter-spacing: 1.3px;
     font-weight: 300;
   }
@@ -72,9 +73,50 @@ body {
     line-height: 40px;
   }
   .button_in1 {
-    
+    color: #831F1D;
+    background-color: transparent;
+    width: 397px;
+    height: 57px;
+    border-radius: 50px;
+    font-family: "Jost", serif;
+    font-size: 32px;
+    letter-spacing: 1.3px;
+    font-weight: 400;
   }
-  
-  
+  .index_2 {
+    display: block;
+    margin:  0 auto;
+    max-width: 1557px;
+    margin-top: 790px;
+
+  }
+  .index_3 {
+    display: block;
+    margin:  0 auto;
+    max-width: 1557px;
+    margin-top: 100px;
+
+  }
+  .index_2 h2, .index_3 h2 {
+    font-family: "Jost", serif;
+    font-size: 48px;
+    color: #831F1D;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+  }
+  .card1 p, .index_3 p {
+    color: #831F1D;
+    font-family: "Jost", serif;
+    font-size: 24px;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+  }
+  .blocki {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1557px;
+    justify-content: space-between;
+
+  }
   
   

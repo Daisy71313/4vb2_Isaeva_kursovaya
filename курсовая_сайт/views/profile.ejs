@@ -2,41 +2,90 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
-    <title>Главная</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <title>Главная</title>
 </head>
+
 <body>
+  <div class="header-box">
     <header>
-        <img src="/img/logo.png" alt="">
-        <ul>
-            <a><li>Коммуникации</li></a>
-            <a><li>Новости</li></a>
-            <a><li>О нас</li></a>
-            <a><li>Мероприятия</li></a>
-        </ul>
-        <a href="/logout">Выйти</a>
-        <% if (user) { %>
-          <% if (user.role === 'admin') { %>
-            <a href="/adminp">Админ-панель</a>
+      <img src="/img/logo.png" alt="">
+      <ul>
+        <a>
+          <li>Коммуникации</li>
+        </a>
+        <a>
+          <li>Новости</li>
+        </a>
+        <a>
+          <li>О нас</li>
+        </a>
+        <a>
+          <li>Мероприятия</li>
+        </a>
+      </ul>
+      <a href="/logout">Выйти</a>
+      <% if (user) { %>
+        <% if (user.role==='admin' ) { %>
+          <a href="/adminp">Админ-панель</a>
           <% } %>
-        <% } else { %>
-          <p>Пожалуйста, авторизуйтесь.</p>
-        <% } %>
+            <% } else { %>
+              <p>Пожалуйста, авторизуйтесь.</p>
+              <% } %>
     </header>
-    <div class="index_1">
-      <img src="/img/image 1.png" alt="" class="index_img">
-      <div class="text_boxin1">
-        <h2>Дай пять!</h2>
-        <h3>Обновлённая культура Rostic's! <br> Жми на кнопку, чтобы разделить ценности с Rostic’s</h3>
-        <button class="button_in1">перейти к ценностям</button>
+  </div>
+  <div class="index_1">
+    <img src="/img/image 1.png" alt="" class="index_img">
+    <div class="text_boxin1">
+      <h2>Дай пять!</h2>
+      <h3>Обновлённая культура Rostic's! <br> Жми на кнопку, чтобы разделить ценности с Rostic’s</h3>
+      <button class="button_in1">перейти к ценностям</button>
+    </div>
+  </div>
+  <div class="index_2">
+    <h2>Главное</h2>
+    <div class="blocki">
+      <div class="card1">
+        <img src="/img/image_g1.png" alt="">
+        <p>Новинка! Платформа Признания</p>
+      </div>
+      <div class="card1">
+        <img src="/img/image_g2.png" alt="">
+        <p>+1 ммс в Rostic’s Армада-2</p>
+      </div>
+      <div class="card1">
+        <img src="/img/image_g3.png" alt="">
+        <p>Успей украсить свой ресторан!</p>
       </div>
     </div>
+  </div>
+  <div class="index_3">
+    <h2>О нас</h2>
+    <p>В 2022 году об уходе с российского рынка и продаже своего бизнеса заявили многие зарубежные бренды. В том числе и
+      международная сеть ресторанов общественного питания KFC, имевшая в России как собственные заведения, так и
+      развивавшаяся по франшизе. </p>
+    <p>В начале марта 2022 года Yum! Brands сделала заявление о приостановке работы 66 ресторанов. В октябре также
+      появилась информация о том, что свой бизнес вместе с мастер-франшизой компания продаст своим ижевским франчайзи
+      Smart Service Ltd., под управлением Константина Котова и Андрея Осколкова.</p>
+    <p>О том, что сделка о продаже бизнеса завершена, компания Yum! Brands объявила 17 апреля 2023 года. Новый владелец
+      получил права на все собственные рестораны KFC в России, права на мастер-франшизу, операционную систему, а также
+      условие по ребрендингу: бренд своих и франчайзинговых ресторанов покупателей обязали сменить с KFC на Rostic’s, но
+      с сохранением всех рабочих мест российской команды.</p>
+    <p>“Ростик’с” - это российский бренд от российского ресторанного холдинга “Росинтер”, которая в 1993 году открыла в
+      России аналог KFC, а в 2005 году стала франчайзи американской корпорации KFC в России. Между “Росинтер” и KFC был
+      заключен договор, согласно которому появился новый объединенный бренд “Ростик’с - KFC”. Со временем Yum! Brands,
+      на правах опциона на покупку или продажу совместного бизнеса выкупила «Ростик’с—KFC» и в сентябре 2011 года начала
+      заменять общий бренд на KFC.</p>
+    <p>Таким образом, бренд KFC, проработавший в России с 1993 года, сменился на Rostic’s, уже знакомый многим
+      потребителям с 2000-х годов, а также ассоциативно связанный с KFC благодаря существованию совместного бренда
+      «Ростик’с—KFC». Что же касается самого происхождения бренда Rostic's, то он появился от имени основателя
+      “Росинтера” - это венесуэльский и российский бизнесмен Ростислав Ордовский-Танаевский Бланко.</p>
 </body>
 
 </html>

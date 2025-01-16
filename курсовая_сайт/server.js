@@ -66,6 +66,7 @@ const User = sequelize.define(
   { timestamps: false }
 );
 
+
 // Установка связей
 Role.hasMany(User, { foreignKey: "roleId" });
 User.belongsTo(Role, { foreignKey: "roleId" });
