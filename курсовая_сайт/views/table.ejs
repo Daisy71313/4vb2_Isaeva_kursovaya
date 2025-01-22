@@ -9,6 +9,18 @@
       rel="stylesheet">
       <link rel="stylesheet" href="/style-admin.css">
     <title>Таблицы</title>
+    <style>
+     table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+  </style>
+</head>
 </head>
 <body>
     <div class="header-box">
@@ -27,8 +39,45 @@
             <a>
               <li>Коммуникации</li>
             </a>
+            <a>
+              <li>Регистрация</li>
+            </a>
           </ul>
           <a href="/logout">Выйти</a>
       </div>
+      <h1>Список пользователей</h1>
+    <table id="usersTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Login</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        fetch('/users')
+            .then(response => response.json())
+            .then(users => {
+                const tbody = document.querySelector('#usersTable tbody');
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.login}</td>
+                        <td>${user.name}</td>
+                        <td>${user.password}</td>
+                        <td>${user.roleId}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Ошибка при загрузке пользователей:', error));
+    </script>
 </body>
 </html>

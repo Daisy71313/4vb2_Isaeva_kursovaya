@@ -146,7 +146,9 @@ function hasRole(roleName) {
     }
   };
 }
-
+app.get('/table', (req, res) => {
+  res.render('table'); // Убедитесь, что у вас есть файл table.ejs в папке views
+});
 
 // Главная страница
 app.get("/", (req, res) => {
@@ -235,6 +237,15 @@ app.get("/adminp", authMiddleware, adminMiddleware, (req, res) => {
   res.render("admin", { user: req.session.user });
 });
 
+//получение пользователя
+app.get('/users', async (req, res) => {
+  try {
+      const users = await User.findAll();
+      res.json(users);
+  } catch (error) {
+      res.status(500).send('Ошибка при получении данных пользователей');
+  }
+});
 
 // Роут для выхода (без изменений)
 app.get("/logout", (req, res) => {
@@ -243,7 +254,6 @@ app.get("/logout", (req, res) => {
     res.redirect("/login");
   });
 });
-
 app.listen(port, () => {
   console.log(`Сервер запущен на порту http://localhost:${port}`);
 });
