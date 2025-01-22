@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style-user.css">
   <title>Главная</title>
 </head>
 
@@ -30,14 +30,14 @@
           <li>Мероприятия</li>
         </a>
       </ul>
-      <a href="/logout">Выйти</a>
-      <% if (user) { %>
-        <% if (user.role==='admin' ) { %>
-          <a href="/adminp">Админ-панель</a>
-          <% } %>
-            <% } else { %>
-              <p>Пожалуйста, авторизуйтесь.</p>
-              <% } %>
+        <a href="/logout">Выйти</a>
+        <% if (user) { %>
+          <% if (user.role==='admin' ) { %>
+            <a href="/register">/Админ-панель</a class="adm">
+            <% } %>
+              <% } else { %>
+                <p>Пожалуйста, авторизуйтесь.</p>
+                <% } %>
     </header>
   </div>
   <div class="index_1">
@@ -87,24 +87,24 @@
       «Ростик’с—KFC». Что же касается самого происхождения бренда Rostic's, то он появился от имени основателя
       “Росинтера” - это венесуэльский и российский бизнесмен Ростислав Ордовский-Танаевский Бланко.</p>
   </div>
-      <footer>
-        <div class="block_fot">
-          <ul>
-            <li class="li_b">Контакты </li>
-            <li>Название компании: ООО “ОренРест” </li>
-            <li>Юр.адрес: 450078, Республика Башкортостан, г. Уфа, ул. Владивостокская д.2</li>
-            <li>Телефон: 13-34-05</li>
-            <li>Email: office@grufa.ru</li>
-          </ul>
-        <ul>
-          <li class="li_b">Реквизиты </li>
-          <li>ИНН: 0278202810</li>
-          <li>КПП: 027801001</li>
-          <li>ОГРН: 1130280050196</li>
-          <li>Организационно-правовая форма: Общество с ограниченной ответственностью</li>
-        </ul>
-      </div>
-      </footer>
+  <footer>
+    <div class="block_fot">
+      <ul>
+        <li class="li_b">Контакты </li>
+        <li>Название компании: ООО “ОренРест” </li>
+        <li>Юр.адрес: 450078, Республика Башкортостан, г. Уфа, ул. Владивостокская д.2</li>
+        <li>Телефон: 13-34-05</li>
+        <li>Email: office@grufa.ru</li>
+      </ul>
+      <ul>
+        <li class="li_b">Реквизиты </li>
+        <li>ИНН: 0278202810</li>
+        <li>КПП: 027801001</li>
+        <li>ОГРН: 1130280050196</li>
+        <li>Организационно-правовая форма: Общество с ограниченной ответственностью</li>
+      </ul>
+    </div>
+  </footer>
 </body>
 
 </html>
