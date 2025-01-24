@@ -15,29 +15,27 @@
 <body>
   <div class="header-box">
     <header>
-      <img src="/img/logo.png" alt="">
+      <a href="/profile"><img src="/img/logo.png" alt=""></a>
       <ul>
-        <a>
-          <li>Коммуникации</li>
-        </a>
+        <a href="/communication"><li>Коммуникации</li></a>
         <a>
           <li>Новости</li>
         </a>
-        <a>
+        <a href="#about">
           <li>О нас</li>
         </a>
         <a>
           <li>Мероприятия</li>
         </a>
       </ul>
-        <a href="/logout">Выйти</a>
-        <% if (user) { %>
-          <% if (user.role==='admin' ) { %>
-            <a href="/register">/Админ-панель</a>
-            <% } %>
-              <% } else { %>
-                <p>Пожалуйста, авторизуйтесь.</p>
-                <% } %>
+      <a href="/logout">Выйти</a>
+      <% if (user) { %>
+        <% if (user.role==='admin' ) { %>
+          <a href="/register">/Админ-панель</a>
+          <% } %>
+            <% } else { %>
+              <p>Пожалуйста, авторизуйтесь.</p>
+              <% } %>
     </header>
   </div>
   <div class="index_1">
@@ -65,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div class="index_3">
+  <div class="index_3" id="about">
     <h2>О нас</h2>
     <p>В 2022 году об уходе с российского рынка и продаже своего бизнеса заявили многие зарубежные бренды. В том числе и
       международная сеть ресторанов общественного питания KFC, имевшая в России как собственные заведения, так и

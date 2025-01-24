@@ -147,7 +147,10 @@ function hasRole(roleName) {
   };
 }
 app.get('/table', (req, res) => {
-  res.render('table'); // Убедитесь, что у вас есть файл table.ejs в папке views
+  res.render('table'); 
+});
+app.get('/communication', (req, res) => {
+  res.render('communication', { user: req.user });
 });
 
 // Главная страница
@@ -173,7 +176,7 @@ app.post("/register", async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({ login, password: hashedPassword, roleId: role.id, name });
-    res.redirect("/login");
+    res.redirect("/register");
   } catch (error) {
     console.error("Ошибка регистрации:", error);
     res.status(400).send("Ошибка регистрации: " + error.message);
@@ -197,9 +200,6 @@ const adminMiddleware = (req, res, next) => {
     res.redirect('/'); // Перенаправляем на главную, если не админ
   }
 };
-
-// ... (остальной код, включая модели User и Role) ...
-
 
 // Роут для страницы авторизации (без изменений)
 app.get("/login", (req, res) => {
