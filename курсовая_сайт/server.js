@@ -66,7 +66,79 @@ const User = sequelize.define(
   { timestamps: false }
 );
 
+const Communications = sequelize.define(
+  "Communications",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    heading: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    teg: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  { timestamps: false }
+);
+async function fillTable() {
+  try {
+    // Синхронизируем модель с базой данных
+    await sequelize.sync();
 
+    // Добавление нескольких записей
+    const communications = await Communications.bulkCreate([
+      { heading: 'Изменение графиков работы поставщиков в предновогодний период', teg: '#логистика', date: '18.12.2024' },
+      { heading: 'Отчет по сертификации фритюров', teg: '#СертификацияФритюров', date: '16.12.2024' },
+      { heading: 'OPS Цели 2025', teg: '#СтандартыОперационнойДеятельности', date: '16.12.2024' },
+      { heading: 'Замена упаковки для чикен кесадилья', teg: '#НациональныйЗапуск', date: '17.12.2024' },
+      { heading: 'Обновлен и актуализирован CSL "Работа с отчетами в R-Keeper"', teg: '#СтандартыОперационнойДеятельности', date: '05.11.2024' },
+      { heading: 'Замена химии для кофемашин Franke на CTM', teg: '#логистика', date: '16.12.2024' },
+    ]);
+
+    console.log('Данные успешно добавлены:');
+    communications.forEach(comm => console.log(comm.toJSON()));
+  } catch (error) {
+    console.error('Ошибка при добавлении данных:', error);
+  } //sequelize.close() убрано, так как sequelize сам закрывает соединение, если это необходимо.
+}
+
+// Вызов функции
+fillTable();
+
+const Feedbacks = sequelize.define(
+  "Feedbacks",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    question: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  { timestamps: false }
+);
 // Установка связей
 Role.hasMany(User, { foreignKey: "roleId" });
 User.belongsTo(Role, { foreignKey: "roleId" });
@@ -90,7 +162,7 @@ sequelize
     //Проверка есть ли пользователи в бд
     const usersCount = await User.count();
 
-    // Если нет пользователей - создаем админа
+    //  Создаем админа
     if (usersCount === 0) {
       const adminRole = await Role.findOne({ where: { name: "admin" } });
       if (!adminRole) {
@@ -159,6 +231,20 @@ app.get("/", (req, res) => {
     res.redirect("/profile");
   } else {
     res.redirect("/login");
+  }
+});
+
+app.post('/feedbacks', async (req, res) => {
+  try {
+    const { name, email, question } = req.body;
+    if (!name || !email || !question) {
+      return res.status(400).send('Заполните все поля');
+    }
+    await Feedbacks.create({ name, email, question });
+    res.send('Заявка успешно отправлена!');
+  } catch (error) {
+    console.error('Ошибка при создании записи:', error);
+    res.status(500).send('Ошибка сервера');
   }
 });
 

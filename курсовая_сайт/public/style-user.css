@@ -126,6 +126,7 @@ h3 {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
+  margin-bottom: 80px;
 
 }
 .boxcom p, .commun_box p {
@@ -243,6 +244,7 @@ footer {
 .com {
   display: flex;
   justify-content: center;
+  margin-bottom: 110px;
 }
 input {
   background-color: #FFE9E9;
@@ -272,7 +274,18 @@ input {
   height: 658px;
   background-color: #750604;
   opacity: 70%;
-}
+} 
+.commun_block{
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  padding-left: 140px;
+  padding-top: 100px;
+  width: 1090px;
+  height: 658px;
+  background-color: #750604;
+  opacity: 70%;
+} 
 
 .button {
   width: 255px;
@@ -286,7 +299,7 @@ input {
 
 }
 
-.reg_block h1 {
+.reg_block h1, .commun_block h1 {
   color: #FFFFFF;
   font-family: "Jost", serif;
   font-size: 48px;
@@ -304,7 +317,7 @@ input {
   margin-left: 20px;
 }
 
-.img_reg {
+.img_reg, .img_comm {
   position: absolute;
   margin-left: 750px;
 }
