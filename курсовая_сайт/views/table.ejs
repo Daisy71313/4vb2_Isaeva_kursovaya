@@ -72,18 +72,6 @@
     <tbody>
     </tbody>
   </table>
-  <h1>Вопросы</h1>
-  <table id="feedbacksTable" border="1">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Почта</th>
-        <th>Вопрос</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
   <script>
     fetch('/users')
       .then(response => response.json())
@@ -121,22 +109,6 @@ fetch('/communications')
         });
     })
     .catch(error => console.error('Ошибка при загрузке данных:', error));
-fetch('/feedbacks')
-      .then(response => response.json())
-      .then(feedbacks => {
-        const tbody2 = document.querySelector('#feedbacksTable tbody');
-        feedbacks.forEach(feedback => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-                        <td>${feedback.id}</td>
-                        <td>${feedback.name}</td>
-                        <td>${feedback.email}</td>
-                        <td>${feedback.question}</td>
-                    `;
-          tbody.appendChild(row);
-        });
-      })
-      .catch(error => console.error('Ошибка', error));
   </script>
 </body>
 
