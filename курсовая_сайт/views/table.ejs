@@ -1,92 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet">
-      <link rel="stylesheet" href="/style-admin.css">
-    <title>Таблицы</title>
-    <style>
-     table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style-admin.css">
+  <title>Таблицы</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
   </style>
 </head>
 </head>
+
 <body>
-    <div class="header-box">
-        <header>
-          <img src="/img/logo.png" alt="">
-          <ul>
-            <a>
-              <li>Таблицы</li>
-            </a>
-            <a>
-              <li>Новости</li>
-            </a>
-            <a>
-              <li>Коммуникации</li>
-            </a>
-            <a href="/register">
-              <li>Регистрация</li>
-            </a>
-          </ul>
-          <a href="/logout">Выйти</a>
-      </div>
-      <h1>Список пользователей</h1>
-    <table id="usersTable" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Логин</th>
-                <th>Имя</th>
-                <th>Роль</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <h1>Коммуникации</h1>
-    <table id="communicationsTable" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Название</th>
-                <th>Дата</th>
-                <th>Тег</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <script>
-        fetch('/users')
-            .then(response => response.json())
-            .then(users => {
-                const tbody = document.querySelector('#usersTable tbody');
-                users.forEach(user => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
+  <div class="header-box">
+    <header>
+      <img src="/img/logo.png" alt="">
+      <ul>
+        <a>
+          <li>Таблицы</li>
+        </a>
+        <a>
+          <li>Новости</li>
+        </a>
+        <a>
+          <li>Коммуникации</li>
+        </a>
+        <a href="/register">
+          <li>Регистрация</li>
+        </a>
+      </ul>
+      <a href="/logout">Выйти</a>
+  </div>
+  <h1>Список пользователей</h1>
+  <table id="usersTable" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Логин</th>
+        <th>Имя</th>
+        <th>Роль</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <h1>Коммуникации</h1>
+  <table id="communicationsTable" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Дата</th>
+        <th>Тег</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <h1>Вопросы</h1>
+  <table id="feedbacksTable" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Почта</th>
+        <th>Вопрос</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script>
+    fetch('/users')
+      .then(response => response.json())
+      .then(users => {
+        const tbody = document.querySelector('#usersTable tbody');
+        users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
                         <td>${user.id}</td>
                         <td>${user.login}</td>
                         <td>${user.name}</td>
                         <td>${user.roleId}</td>
                     `;
-                    tbody.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Ошибка при загрузке пользователей:', error));
-    </script>
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Ошибка при загрузке пользователей:', error));
+
+      const tableBody = document.querySelector('#communicationsTable tbody');
+
+fetch('/communications')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(communication => {
+            const row = tableBody.insertRow();
+            const idCell = row.insertCell();
+            const headingCell = row.insertCell();
+            const dateCell = row.insertCell();
+            const tegCell = row.insertCell();
+
+            idCell.textContent = communication.id;
+            headingCell.textContent = communication.heading;
+            dateCell.textContent = communication.date; 
+            tegCell.textContent = communication.teg;
+        });
+    })
+    .catch(error => console.error('Ошибка при загрузке данных:', error));
+fetch('/feedbacks')
+      .then(response => response.json())
+      .then(feedbacks => {
+        const tbody2 = document.querySelector('#feedbacksTable tbody');
+        feedbacks.forEach(feedback => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+                        <td>${feedback.id}</td>
+                        <td>${feedback.name}</td>
+                        <td>${feedback.email}</td>
+                        <td>${feedback.question}</td>
+                    `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Ошибка', error));
+  </script>
 </body>
+
 </html>

@@ -90,30 +90,30 @@ const Communications = sequelize.define(
   },
   { timestamps: false }
 );
-async function fillTable() {
-  try {
-    // Синхронизируем модель с базой данных
-    await sequelize.sync();
-
-    // Добавление нескольких записей
-    const communications = await Communications.bulkCreate([
-      { heading: 'Изменение графиков работы поставщиков в предновогодний период', teg: '#логистика', date: '18.12.2024' },
-      { heading: 'Отчет по сертификации фритюров', teg: '#СертификацияФритюров', date: '16.12.2024' },
-      { heading: 'OPS Цели 2025', teg: '#СтандартыОперационнойДеятельности', date: '16.12.2024' },
-      { heading: 'Замена упаковки для чикен кесадилья', teg: '#НациональныйЗапуск', date: '17.12.2024' },
-      { heading: 'Обновлен и актуализирован CSL "Работа с отчетами в R-Keeper"', teg: '#СтандартыОперационнойДеятельности', date: '05.11.2024' },
-      { heading: 'Замена химии для кофемашин Franke на CTM', teg: '#логистика', date: '16.12.2024' },
-    ]);
-
-    console.log('Данные успешно добавлены:');
-    communications.forEach(comm => console.log(comm.toJSON()));
-  } catch (error) {
-    console.error('Ошибка при добавлении данных:', error);
-  } //sequelize.close() убрано, так как sequelize сам закрывает соединение, если это необходимо.
-}
-
-// Вызов функции
-fillTable();
+      async function upsertData() {
+        try {
+          const dataToInsert = [
+            { heading: 'Изменение графиков работы поставщиков в предновогодний период', teg: '#логистика', date: '18.12.2024' },
+            { heading: 'Отчет по сертификации фритюров', teg: '#СертификацияФритюров', date: '16.12.2024' },
+            { heading: 'OPS Цели 2025', teg: '#СтандартыОперационнойДеятельности', date: '16.12.2024' },
+            { heading: 'Замена упаковки для чикен кесадилья', teg: '#НациональныйЗапуск', date: '17.12.2024' },
+            { heading: 'Обновлен и актуализирован CSL "Работа с отчетами в R-Keeper"', teg: '#СтандартыОперационнойДеятельности', date: '05.11.2024' },
+            { heading: 'Замена химии для кофемашин Franke на CTM', teg: '#логистика', date: '16.12.2024' },
+          ];
+      
+          for (const item of dataToInsert) {
+            const [updatedRecord, created] = await Communications.findOrCreate({
+              where: { heading: item.heading },
+              defaults: item,
+            });
+            console.log(created ? 'Создана запись:' : 'Обновлена запись:', updatedRecord.toJSON());
+          }
+        } catch (error) {
+          console.error('Ошибка:', error);
+        }
+      }
+      
+      upsertData();
 
 const Feedbacks = sequelize.define(
   "Feedbacks",
@@ -224,6 +224,15 @@ app.get('/table', (req, res) => {
 app.get('/communication', (req, res) => {
   res.render('communication', { user: req.user });
 });
+app.get('/feedbacks', async (req, res) => {
+  try {
+    const feedbacks = await Feedbacks.findAll();
+    res.json(feedbacks);
+  } catch (error) {
+    console.error('Ошибка:', error);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
 
 // Главная страница
 app.get("/", (req, res) => {
@@ -330,6 +339,16 @@ app.get('/users', async (req, res) => {
       res.json(users);
   } catch (error) {
       res.status(500).send('Ошибка при получении данных пользователей');
+  }
+});
+// получение коммуниций
+app.get('/communications', async (req, res) => {
+  try {
+      const communications = await Communications.findAll();
+      res.json(communications);
+  } catch (error) {
+      console.error('Ошибка:', error);
+      res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
 
